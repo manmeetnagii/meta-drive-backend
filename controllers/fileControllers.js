@@ -94,7 +94,8 @@ export const uploadFiles = async (req, res) => {
 // LISTING FILES OF LOGGED-IN USER
 export const listFiles = async (req, res) => {
   const params = {
-    Bucket: 'gdrive-s3-bucket/dcmfiles',
+    Bucket: bucketName,
+    Prefix: "dcmfiles" + "/",
   };
 
   try {
