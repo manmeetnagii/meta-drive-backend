@@ -63,7 +63,10 @@ export const uploadFiles = async (req, res) => {
   const folderKey = req.body.folderKey;
   const userId = req.body.userId;
   const fileName = req.file.originalname;
-  const fileType = req.file.mimetype;
+  const fileType = req.file.mimetype === "application/octet-stream" ? "application/dicom" : req.file.mimetype;
+
+  console.log(fileType);
+  
 
   const params = {
     Bucket: bucketName,
@@ -91,8 +94,7 @@ export const uploadFiles = async (req, res) => {
 // LISTING FILES OF LOGGED-IN USER
 export const listFiles = async (req, res) => {
   const params = {
-    Bucket: bucketName,
-    Prefix: req.query.folderKey + "/",
+    Bucket: 'gdrive-s3-bucket/dcmfiles',
   };
 
   try {
